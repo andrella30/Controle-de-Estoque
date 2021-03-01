@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap')
+	;
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.5em;
+	font-weight: 400;
+}
+
+h1 {
+	background-color: #66bbff;
+}
+
+.cabecalho {
+	border-bottom: 0.5px #606060 solid;
+	height: 100px;
+	background-color: #66bbff;
+}
+
+.table_center {
+	margin-top: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.Botao1 {
+	text-decoration: none;
+	background-color: #66bbff;
+	padding: 5px 10px 5px 10px;
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: 700;
+	border-radius: 5px;
+	border: 0;
+	cursor: pointer;
+	margin-left: 20px;
+}
+
+.BotaoDelet {
+	text-decoration: none;
+	background-color: #ff2400;
+	padding: 5px 10px 5px 10px;
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: 700;
+	border-radius: 5px;
+	border: 0;
+	cursor: pointer;
+	margin-left: 20px;
+}
+
+.Caixa1 {
+	width: 320px;
+	padding: 5px;
+	margin-bottom: 10px;
+	border: 1px solid #66bbff;
+	border-radius: 5px;
+}
+
+#tabela {
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#tabela th {
+	border: 1px solid #ddd;
+	padding: 10px;
+	text-align: left;
+	background-color: #66bbff;
+	color: #fff;
+}
+
+#tabela td {
+	border: 1px solid #ddd;
+	padding: 10px;
+}
