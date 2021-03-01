@@ -97,7 +97,7 @@ public class Controller extends HttpServlet {
 		produto.setUnidade_medida((request.getParameter("unidade")));
 		produto.setQuantidade_estoque(Integer.parseInt(request.getParameter("quantidade")));
 		produto.setValor_total_estoque(Float.parseFloat(request.getParameter("valor")));
-
+		
 		dao.inserirProduto(produto);
 		response.sendRedirect("main");
 	}
@@ -235,15 +235,13 @@ public class Controller extends HttpServlet {
 			pCabecalho.add(new Phrase("RELATÓRIO"));
 			pCabecalho.setAlignment(Element.ALIGN_CENTER);
 			document.add(pCabecalho);
-			
-			
+
 			Paragraph pListagem = new Paragraph();
 			document.add(new Phrase(Chunk.NEWLINE));
 			pListagem.add(new Phrase("Relátório Lista de Preço"));
 			pListagem.setAlignment(Element.ALIGN_CENTER);
 			document.add(pListagem);
 			document.add(new Phrase(Chunk.NEWLINE));
-			
 
 			PdfPTable table = new PdfPTable(5);
 
@@ -260,7 +258,7 @@ public class Controller extends HttpServlet {
 				table.addCell(String.valueOf(lista.get(i).getQuantidade_estoque()));
 				table.addCell(String.valueOf(lista.get(i).getValor_total_estoque()));
 			}
-			
+
 			document.add(table);
 
 			Paragraph pBalanco = new Paragraph();
@@ -269,8 +267,6 @@ public class Controller extends HttpServlet {
 			pBalanco.setAlignment(Element.ALIGN_CENTER);
 			document.add(pBalanco);
 			document.add(new Phrase(Chunk.NEWLINE));
-	
-
 
 			PdfPTable table1 = new PdfPTable(3);
 
@@ -283,17 +279,16 @@ public class Controller extends HttpServlet {
 				table1.addCell(String.valueOf(lista.get(i).getQuantidade_estoque()));
 				table1.addCell(valor_unitario.get(i).toString());
 			}
-			
+
 			document.add(table1);
 			document.add(new Phrase(Chunk.NEWLINE));
-			
+
 			Paragraph pBalancoFinal = new Paragraph();
 			pBalancoFinal.add(new Phrase("Balanço Financeiro: "));
 			pBalancoFinal.add(new Phrase(sum_produtos.get(0).toString()));
 			pBalancoFinal.setAlignment(Element.ALIGN_CENTER);
 			document.add(pBalancoFinal);
 
-			
 //			document.add(pBalanco);
 //			
 //			document.add(new Phrase(Chunk.NEWLINE));

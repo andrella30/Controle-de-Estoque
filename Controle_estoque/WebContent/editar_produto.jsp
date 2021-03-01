@@ -38,20 +38,20 @@ String produto = request.getParameter("nome_produto");
 
 			<table class="table_center">
 				<tr>
-					<td><input type="text" name="preco" placeholder="Preço"
-						class="Caixa1"></td>
+					<td><input type="number" name="preco" placeholder="Preço"
+						class="Caixa1" min="0" pattern="^[1-9]\d*$"></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="unidade"
 						placeholder="Unidade de Medida" class="Caixa1"></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="quantidade"
-						placeholder="Quantidade de produto" class="Caixa1"></td>
+					<td><input type="number" name="quantidade"
+						placeholder="Quantidade de produto" class="Caixa1" min="0" pattern="^[1-9]\d*$"></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="valor" placeholder="Valor Total"
-						class="Caixa1"></td>
+					<td><input type="number" name="valor" placeholder="Valor Total"
+						class="Caixa1" min="0"></td>
 				</tr>
 
 			</table>

@@ -1,14 +1,17 @@
 /**
  * 
  */
- 
- 	
- 
-function validar_delecao() {	
-	if(confirm("Tem certeza que deseja deletar o produto?") == true) {
-		alert("Produto Deletado")
+
+
+
+function validar_delecao() {
+
+	var txt;
+	var r = confirm("Deseja Realmente Deletar?");
+	if (r == true) {
+		txt = "OK";
 	} else {
-	
+		txt = "Cancel";
 	}
 
 }

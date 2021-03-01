@@ -6,9 +6,13 @@ function validar_reajuste() {
 
 	let preco = frmReajuste.preco.value
 
-	if (preco === "") {
+	if ( preco === "") {
 		alert('Preencha o campo Quantidade')
 		frmReajuste.quantidade.focus()
+		return false
+	} else if (preco < 0) {
+		alert('Valor Invalido')
+		frmReajuste.preco.focus()
 		return false
 	} else {
 		document.forms["frmReajuste"].submit()

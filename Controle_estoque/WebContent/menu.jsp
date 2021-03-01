@@ -22,9 +22,7 @@ ArrayList<Produto> lista = (ArrayList<Produto>) request.getAttribute("produto");
 	<div style="text-align: center">
 		<h1></h1>
 		<a href="cadastro_produto.html" class="Botao1"> Cadastrar Produto
-		</a>
-		 <a href="gerar_relatorio" class="Botao1"> Relatórios
-		</a>
+		</a> <a href="gerar_relatorio" class="Botao1"> Relatório </a>
 	</div>
 
 	<div style="text-align: center">
@@ -55,7 +53,9 @@ ArrayList<Produto> lista = (ArrayList<Produto>) request.getAttribute("produto");
 						href="editar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>"
 						class="Botao1"> Editar </a> <a
 						href="deletar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>"
-						class="BotaoDelet" onclick="validar_delecao()"> Deletar </a> <a
+						title="delete" class="BotaoDelet"
+						onclick="return confirm('Deseja Realmente deletar?')">Deletar</a>
+						<a
 						href="movimentar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>&preco_unitario=<%=lista.get(i).getPreco_unitario()%>"
 						class="Botao1"> Movimentação </a> <a
 						href="reajuste_produto?nome_produto=<%=lista.get(i).getNome_produto()%>&quantidade=<%=lista.get(i).getQuantidade_estoque()%>"
