@@ -104,6 +104,35 @@ public class ProdutoDAO {
 
 	// Delete (deletar produto)
 	public void deletarProduto(Produto produto) {
+
+		String delete_reajuste = "DELETE FROM reajuste where nome_produto = ?";
+
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(delete_reajuste);
+			pst.setString(1, produto.getNome_produto());
+
+			pst.executeUpdate();
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		String delete_movimentacao = "DELETE FROM movimentacao where nome_produto = ?";
+
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(delete_movimentacao);
+			pst.setString(1, produto.getNome_produto());
+
+			pst.executeUpdate();
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 		String delete = "DELETE FROM produto where nome_produto = ?";
 
 		try {
@@ -117,10 +146,11 @@ public class ProdutoDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+
 	}
 
 	// Movimentacao Adicionar
-	public void movimentacaoAddProduto(Produto produto) {
+	public void movimentacaoAddProduto(Produto produto, Movimentacao movimentacao) {
 		String mov = "update produto set quantidade_estoque = quantidade_estoque + ? where nome_produto = ?";
 
 		try {
@@ -153,10 +183,24 @@ public class ProdutoDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+
+		String mov_table = "insert into movimentacao (data_reajuste, nome_produto) values (now(), ?) ";
+
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(mov_table);
+			pst.setString(1, movimentacao.getNome_produto());
+			pst.executeUpdate();
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 	}
 
 	// Movimentacao Remover
-	public void movimentacaoRemoveProduto(Produto produto) {
+	public void movimentacaoRemoveProduto(Produto produto, Movimentacao movimentacao) {
 		String mov = "update produto set quantidade_estoque = quantidade_estoque - ? where nome_produto = ?";
 
 		try {
@@ -189,16 +233,28 @@ public class ProdutoDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-	}
 
-	// Reajustar Preço
-	public void reajustePreco(Produto produto) {
-		String reajuste = "update produto set preco_unitario = ((?/100) * preco_unitario) + preco_unitario  where nome_produto = ?";
-		//String reajuste = "update produto set preco_unitario = ? where nome_produto =  ?";
+		String mov_table = "insert into movimentacao (data_reajuste, nome_produto) values (now(), ?) ";
 
 		try {
 			Connection con = conectar();
-			PreparedStatement pst = con.prepareStatement(reajuste);
+			PreparedStatement pst = con.prepareStatement(mov_table);
+			pst.setString(1, movimentacao.getNome_produto());
+			pst.executeUpdate();
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	// Reajustar Preço
+	public void reajustePreco(Produto produto, Reajuste reajuste) {
+		String reajuste_table = "update produto set preco_unitario = ((?/100) * preco_unitario) + preco_unitario  where nome_produto = ?";
+
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(reajuste_table);
 
 			pst.setFloat(1, produto.getPreco_unitario());
 			pst.setString(2, produto.getNome_produto());
@@ -215,10 +271,23 @@ public class ProdutoDAO {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(update_preco);
 
-			//pst.setFloat(1, produto.getPreco_unitario());
+			// pst.setFloat(1, produto.getPreco_unitario());
 			pst.setInt(1, produto.getQuantidade_estoque());
 			pst.setString(2, produto.getNome_produto());
 
+			pst.executeUpdate();
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		String reaj_table = "insert into reajuste (data_reajuste, nome_produto) values (now(), ?) ";
+
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(reaj_table);
+			pst.setString(1, reajuste.getNome_produto());
 			pst.executeUpdate();
 			con.close();
 

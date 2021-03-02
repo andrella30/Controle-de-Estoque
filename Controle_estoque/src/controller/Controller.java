@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.itextpdf.text.Chunk;
@@ -18,8 +19,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Movimentacao;
 import model.Produto;
 import model.ProdutoDAO;
+import model.Reajuste;
 
 @WebServlet(urlPatterns = { "/Controller", "/main", "/cadastrar_produto", "/editar_produto", "/update_produto",
 		"/deletar_produto", "/movimentar_produto", "/update_movimentacao", "/reajuste_produto", "/update_reajuste",
@@ -29,6 +32,8 @@ public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProdutoDAO dao = new ProdutoDAO();
 	Produto produto = new Produto();
+	Movimentacao movimentacao = new Movimentacao();
+	Reajuste reajuste = new Reajuste();
 
 	public Controller() {
 
@@ -155,6 +160,10 @@ public class Controller extends HttpServlet {
 
 		String nome_produto = request.getParameter("nome_produto");
 		produto.setNome_produto(nome_produto);
+		
+		movimentacao.setNome_produto(nome_produto);
+		movimentacao.setData_reajuste(LocalDateTime.now());
+		
 		System.out.println(produto.getNome_produto());
 
 		String preco_unitario = request.getParameter("preco_unitario");
@@ -179,11 +188,11 @@ public class Controller extends HttpServlet {
 
 		if (tipo.equals("Adicionar")) {
 			System.out.println("Add");
-			dao.movimentacaoAddProduto(produto);
+			dao.movimentacaoAddProduto(produto, movimentacao);
 			response.sendRedirect("main");
 		} else if (tipo.equals("Remover")) {
 			System.out.println("Rem");
-			dao.movimentacaoRemoveProduto(produto);
+			dao.movimentacaoRemoveProduto(produto, movimentacao);
 			response.sendRedirect("main");
 		}
 
@@ -195,8 +204,7 @@ public class Controller extends HttpServlet {
 
 		String nome_produto = request.getParameter("nome_produto");
 		produto.setNome_produto(nome_produto);
-
-
+		reajuste.setNome_produto(nome_produto);
 		produto.setQuantidade_estoque(Integer.parseInt(request.getParameter("quantidade")));
 
 
@@ -213,7 +221,7 @@ public class Controller extends HttpServlet {
 		produto.setPreco_unitario(Float.parseFloat(request.getParameter("preco")));
 		
 
-		dao.reajustePreco(produto);
+		dao.reajustePreco(produto, reajuste);
 		response.sendRedirect("main");
 
 	}
@@ -296,6 +304,9 @@ public class Controller extends HttpServlet {
 		} catch (DocumentException e) {
 			System.out.println(e);
 		}
+		
+		
+	
 	}
 
 }
