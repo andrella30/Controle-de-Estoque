@@ -39,6 +39,18 @@ h1 {
 	margin-left: 20px;
 }
 
+.BotaoDelet {
+	text-decoration: none;
+	background-color: #ff2400;
+	padding: 5px 10px 5px 10px;
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: 700;
+	border-radius: 5px;
+	border: 0;
+	cursor: pointer;
+	margin-left: 20px;
+}
 
 .Caixa1 {
 	width: 320px;
@@ -46,4 +58,23 @@ h1 {
 	margin-bottom: 10px;
 	border: 1px solid #66bbff;
 	border-radius: 5px;
+}
+
+#tabela {
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#tabela th {
+	border: 1px solid #ddd;
+	padding: 10px;
+	text-align: left;
+	background-color: #66bbff;
+	color: #fff;
+}
+
+#tabela td {
+	border: 1px solid #ddd;
+	padding: 10px;
 }

@@ -31,15 +31,17 @@ public class ProdutoDAO {
 
 	// Create (inserir produto)
 	public void inserirProduto(Produto produto) {
-		String create = "insert into produto (nome_produto, preco_unitario, unidade_medida, quantidade_estoque, preco_total) values (?,?,?,?,?) ";
+		String create = "insert into produto (nome_produto, preco_unitario, quantidade_estoque, unidade_medida, preco_total) values (?,?,?,?,?) ";
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(create);
 			pst.setString(1, produto.getNome_produto());
 			pst.setFloat(2, produto.getPreco_unitario());
-			pst.setString(3, produto.getUnidade_medida());
-			pst.setInt(4, produto.getQuantidade_estoque());
+			pst.setInt(3, produto.getQuantidade_estoque());
+			pst.setString(4, produto.getUnidade_medida());
 			pst.setFloat(5, produto.getValor_total_estoque());
+
+			System.out.println(produto.getValor_total_estoque());
 
 			pst.executeUpdate();
 			con.close();
@@ -191,7 +193,8 @@ public class ProdutoDAO {
 
 	// Reajustar Preço
 	public void reajustePreco(Produto produto) {
-		String reajuste = "update produto set preco_unitario = ? where nome_produto =  ?";
+		String reajuste = "update produto set preco_unitario = ((?/100) * preco_unitario) + preco_unitario  where nome_produto = ?";
+		//String reajuste = "update produto set preco_unitario = ? where nome_produto =  ?";
 
 		try {
 			Connection con = conectar();
@@ -206,15 +209,15 @@ public class ProdutoDAO {
 			System.out.println(e);
 		}
 
-		String update_preco = "update produto set preco_total = ?  * ? where nome_produto = ?";
+		String update_preco = "update produto set preco_total =  preco_unitario  * ? where nome_produto = ?";
 
 		try {
 			Connection con = conectar();
 			PreparedStatement pst = con.prepareStatement(update_preco);
 
-			pst.setFloat(1, produto.getPreco_unitario());
-			pst.setInt(2, produto.getQuantidade_estoque());
-			pst.setString(3, produto.getNome_produto());
+			//pst.setFloat(1, produto.getPreco_unitario());
+			pst.setInt(1, produto.getQuantidade_estoque());
+			pst.setString(2, produto.getNome_produto());
 
 			pst.executeUpdate();
 			con.close();

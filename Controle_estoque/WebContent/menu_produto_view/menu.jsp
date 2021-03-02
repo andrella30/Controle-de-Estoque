@@ -10,7 +10,7 @@ ArrayList<Produto> lista = (ArrayList<Produto>) request.getAttribute("produto");
 <head>
 <meta charset="utf-8">
 <title>Controle de Estoque</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="menu_produto_view/style.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -49,17 +49,21 @@ ArrayList<Produto> lista = (ArrayList<Produto>) request.getAttribute("produto");
 					<td><%=lista.get(i).getUnidade_medida()%></td>
 					<td><%=lista.get(i).getQuantidade_estoque()%></td>
 					<td><%=lista.get(i).getValor_total_estoque()%></td>
-					<td><a
-						href="editar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>"
-						class="Botao1"> Editar </a> <a
-						href="deletar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>"
-						title="delete" class="BotaoDelet"
-						onclick="return confirm('Deseja Realmente deletar?')">Deletar</a>
-						<a
-						href="movimentar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>&preco_unitario=<%=lista.get(i).getPreco_unitario()%>"
-						class="Botao1"> Movimentação </a> <a
-						href="reajuste_produto?nome_produto=<%=lista.get(i).getNome_produto()%>&quantidade=<%=lista.get(i).getQuantidade_estoque()%>"
-						class="Botao1"> Reajuste </a></td>
+					<td>
+					
+					<a href="editar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>&preco_unitario=<%=lista.get(i).getPreco_unitario()%>
+					&unidade=<%=lista.get(i).getUnidade_medida()%>&quantidade=<%=lista.get(i).getQuantidade_estoque()%>" class="Botao1"> Editar </a> 
+						
+					<a href="deletar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>"
+					title="delete" class="BotaoDelet" onclick="return confirm('Deseja Realmente deletar?')"> Deletar</a>
+					
+					<a href="movimentar_produto?nome_produto=<%=lista.get(i).getNome_produto()%>&preco_unitario=<%=lista.get(i).getPreco_unitario()%>
+					&unidade=<%=lista.get(i).getUnidade_medida()%>&quantidade=<%=lista.get(i).getQuantidade_estoque()%>" class="Botao1"> Movimentação </a> 
+					
+					<a href="reajuste_produto?nome_produto=<%=lista.get(i).getNome_produto()%>&preco_unitario=<%=lista.get(i).getPreco_unitario()%>
+					&unidade=<%=lista.get(i).getUnidade_medida()%>&quantidade=<%=lista.get(i).getQuantidade_estoque()%>" class="Botao1"> Reajuste </a>
+					
+					</td>
 
 				</tr>
 				<%

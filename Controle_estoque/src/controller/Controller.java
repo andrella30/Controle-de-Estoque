@@ -82,7 +82,7 @@ public class Controller extends HttpServlet {
 		ArrayList<Produto> lista = dao.listarProdutos();
 
 		request.setAttribute("produto", lista);
-		RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("menu_produto_view/menu.jsp");
 		rd.forward(request, response);
 
 	}
@@ -96,8 +96,11 @@ public class Controller extends HttpServlet {
 		produto.setPreco_unitario(Float.parseFloat(request.getParameter("preco")));
 		produto.setUnidade_medida((request.getParameter("unidade")));
 		produto.setQuantidade_estoque(Integer.parseInt(request.getParameter("quantidade")));
-		produto.setValor_total_estoque(Float.parseFloat(request.getParameter("valor")));
-		
+
+		Float valor_total = Float.parseFloat(request.getParameter("preco"))
+				* Integer.parseInt(request.getParameter("quantidade"));
+		produto.setValor_total_estoque(valor_total);
+
 		dao.inserirProduto(produto);
 		response.sendRedirect("main");
 	}
@@ -107,11 +110,10 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 
 		String nome_produto = request.getParameter("nome_produto");
-		System.out.println(nome_produto);
 		produto.setNome_produto(nome_produto);
-		System.out.println(produto.getNome_produto());
+
 		Produto existeProduto = dao.getProduto(nome_produto);
-		RequestDispatcher rd = request.getRequestDispatcher("editar_produto.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("editar_produto_view/editar_produto.jsp");
 		request.setAttribute("produto", existeProduto);
 		rd.forward(request, response);
 	}
@@ -122,7 +124,10 @@ public class Controller extends HttpServlet {
 		produto.setPreco_unitario(Float.parseFloat(request.getParameter("preco")));
 		produto.setUnidade_medida((request.getParameter("unidade")));
 		produto.setQuantidade_estoque(Integer.parseInt(request.getParameter("quantidade")));
-		produto.setValor_total_estoque(Float.parseFloat(request.getParameter("valor")));
+
+		Float valor = Float.parseFloat(request.getParameter("preco"))
+				* Integer.parseInt(request.getParameter("quantidade"));
+		produto.setValor_total_estoque(valor);
 
 		dao.atualizarProduto(produto);
 		response.sendRedirect("main");
@@ -157,7 +162,7 @@ public class Controller extends HttpServlet {
 		System.out.println(produto.getPreco_unitario());
 
 		Produto existeProduto = dao.getProduto(nome_produto);
-		RequestDispatcher rd = request.getRequestDispatcher("movimentacao.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("movimentacao_produto_view/movimentacao.jsp");
 		request.setAttribute("produto", existeProduto);
 		rd.forward(request, response);
 
@@ -167,12 +172,10 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 
 		String tipo = request.getParameter("submit");
-		System.out.println(tipo);
 
 		String quantidade = request.getParameter("quantidade");
 
 		produto.setQuantidade_estoque(Integer.parseInt(quantidade));
-		System.out.println(produto.getQuantidade_estoque());
 
 		if (tipo.equals("Adicionar")) {
 			System.out.println("Add");
@@ -192,13 +195,13 @@ public class Controller extends HttpServlet {
 
 		String nome_produto = request.getParameter("nome_produto");
 		produto.setNome_produto(nome_produto);
-		System.out.println(produto.getNome_produto());
+
 
 		produto.setQuantidade_estoque(Integer.parseInt(request.getParameter("quantidade")));
-		System.out.println(produto.getQuantidade_estoque());
+
 
 		Produto existeProduto = dao.getProduto(nome_produto);
-		RequestDispatcher rd = request.getRequestDispatcher("reajuste.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("reajuste_produto_view/reajuste.jsp");
 		request.setAttribute("produto", existeProduto);
 		rd.forward(request, response);
 
@@ -208,7 +211,7 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 
 		produto.setPreco_unitario(Float.parseFloat(request.getParameter("preco")));
-		System.out.println(produto.getPreco_unitario());
+		
 
 		dao.reajustePreco(produto);
 		response.sendRedirect("main");
@@ -289,13 +292,6 @@ public class Controller extends HttpServlet {
 			pBalancoFinal.setAlignment(Element.ALIGN_CENTER);
 			document.add(pBalancoFinal);
 
-//			document.add(pBalanco);
-//			
-//			document.add(new Phrase(Chunk.NEWLINE));
-//			document.add(new Phrase(Chunk.NEWLINE));
-//			pBalanco.add(new Phrase(sum_produtos.get(0).toString()));
-//			document.add(pBalanco);
-//
 			document.close();
 		} catch (DocumentException e) {
 			System.out.println(e);

@@ -4,13 +4,16 @@
 <%@ page import="java.util.ArrayList"%>
 <%
 String produto = request.getParameter("nome_produto");
+String preco_unitario = request.getParameter("preco_unitario");
+String unidade = request.getParameter("unidade");
+String quantidade = request.getParameter("quantidade");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Controle de Estoque</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="reajuste_produto_view/style.css">
 </head>
 <body>
 	<h1 style="text-align: center">Reajuste de Preço</h1>
@@ -25,6 +28,9 @@ String produto = request.getParameter("nome_produto");
 					<thead>
 						<tr>
 							<th>Nome Produto</th>
+							<th>Preço</th>
+							<th>Unidade</th>
+							<th>Quantidade</th>
 						</tr>
 					</thead>
 
@@ -33,6 +39,9 @@ String produto = request.getParameter("nome_produto");
 					<tbody>
 						<tr>
 							<td><%=produto%></td>
+							<td><%=preco_unitario%></td>
+							<td><%=unidade%></td>
+							<td><%=quantidade%></td>
 						</tr>
 
 					</tbody>
@@ -42,8 +51,9 @@ String produto = request.getParameter("nome_produto");
 			<table class="table_center">
 
 				<tr>
-					<td><input type="number" name="preco"
-						placeholder="Preço do produto" class="Caixa1" min="0" pattern="^[1-9]\d*$"></td>
+					<td><span> <input type="number" name="preco"
+							placeholder="Valor" class="Caixa1"> %
+					</span></td>
 				</tr>
 
 			</table>

@@ -10,11 +10,7 @@ function validar_reajuste() {
 		alert('Preencha o campo Quantidade')
 		frmReajuste.quantidade.focus()
 		return false
-	} else if (preco < 0) {
-		alert('Valor Invalido')
-		frmReajuste.preco.focus()
-		return false
-	} else {
+	}  else {
 		document.forms["frmReajuste"].submit()
 	}
 

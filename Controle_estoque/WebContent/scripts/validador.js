@@ -9,9 +9,6 @@ function validar() {
 	let preco = frmProduto.preco.value
 	let quantidade = frmProduto.quantidade.value
 	let unidade = frmProduto.unidade.value
-	let valor = frmProduto.valor.value
-
-
 
 	if (nome === "") {
 		alert('Preencha o campo Nome.')
@@ -33,11 +30,7 @@ function validar() {
 		alert('Preencha o campo Unidade')
 		frmProduto.unidade.focus()
 		return false
-	} else if (valor === "" || valor < 0) {
-		alert('Preencha o campo Valor corretamente')
-		frmProduto.valor.focus()
-		return false
 	} else {
-		document.forms["frmProduto"].submit()
-	}
+	document.forms["frmProduto"].submit()
+}
 }
